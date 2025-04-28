@@ -9,7 +9,7 @@ const Navbar = () => {
   const provider = useAuth();
   console.log(provider);
   return (
-    <nav className="flex justify-between items-center bg-white p-4 shadow-md">
+    <nav className="flex justify-between items-center bg-white px-10 py-4 shadow-md">
       <Link to={"/"}>
         <img
           src={logo}
@@ -18,26 +18,81 @@ const Navbar = () => {
         />
       </Link>
       <ul className="flex space-x-4">
-        <li className="px-4 py-2 hover:bg-amber-200/40 hover:text-gray-600 font-semibold rounded-md">
-          <NavLink to={"/"}>Home</NavLink>
+        <li>
+          <NavLink
+            to={"/"}
+            className={({ isActive }) =>
+              `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+                isActive
+                  ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
+                  : ""
+              }`
+            }
+          >
+            Home
+          </NavLink>
         </li>
         {!user && (
           <>
-            <li className="px-4 py-2 hover:bg-amber-200/40 hover:text-gray-600 font-semibold rounded-md">
-              <NavLink to={"/login"}>Login</NavLink>
+            <li>
+              <NavLink
+                to={"/login"}
+                className={({ isActive }) =>
+                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+                    isActive
+                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
+                      : ""
+                  }`
+                }
+              >
+                Login
+              </NavLink>
             </li>
-            <li className="px-4 py-2 hover:bg-amber-200/40 hover:text-gray-600 font-semibold rounded-md">
-              <NavLink to={"/register"}>Register</NavLink>
+            <li>
+              <NavLink
+                to={"/register"}
+                className={({ isActive }) =>
+                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+                    isActive
+                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
+                      : ""
+                  }`
+                }
+              >
+                Register
+              </NavLink>
             </li>
           </>
         )}
         {user && (
           <>
-            <li className="px-4 py-2 hover:bg-amber-200/40 hover:text-gray-600 font-semibold rounded-md">
-              <NavLink to={"/dashboard"}>Dashboard</NavLink>
+            <li>
+              <NavLink
+                to={"/dashboard"}
+                className={({ isActive }) =>
+                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+                    isActive
+                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
+                      : ""
+                  }`
+                }
+              >
+                Dashboard
+              </NavLink>
             </li>
             <li className="px-4 py-2 hover:bg-amber-200/40 hover:text-gray-600 font-semibold rounded-md">
-              <NavLink to={"/profile"}>Profile</NavLink>
+              <NavLink
+                to={"/profile"}
+                className={({ isActive }) =>
+                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+                    isActive
+                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
+                      : ""
+                  }`
+                }
+              >
+                Profile
+              </NavLink>
             </li>
             <li className="px-4 py-2 hover:text-yellow-600 font-semibold rounded-md shadow-inner shadow-gray-300/50">
               <div className="flex items-center gap-2">
