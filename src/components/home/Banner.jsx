@@ -10,7 +10,7 @@ const Banner = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "600px",
+        height: "550px",
       }}
     >
       <div className="w-1/2 flex flex-col justify-center items-start">
@@ -25,12 +25,12 @@ const Banner = () => {
         </p>
         <div>
           <Link to={"/register"}>
-            <button className="bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-800 hover:text-cyan-900 font-semibold px-6 py-3 rounded-md mt-10 transition duration-300 ease-in-out cursor-pointer">
+            <button className="bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-800 hover:text-cyan-900 font-semibold px-8 py-2 rounded-md mt-10 transition duration-300 ease-in-out cursor-pointer">
               Signup
             </button>
           </Link>
           <Link to={"/login"}>
-            <button className="bg-white text-yellow-600 px-6 py-3 rounded-md mt-10 ml-4 border border-amber-400/60 hover:bg-yellow-400/80 font-semibold hover:text-cyan-900 transition duration-300 ease-in-out cursor-pointer">
+            <button className="bg-white text-yellow-600 px-8 py-2 rounded-md mt-10 ml-4 border border-amber-400/60 hover:bg-yellow-400/80 font-semibold hover:text-cyan-900 transition duration-300 ease-in-out cursor-pointer">
               Login
             </button>
           </Link>

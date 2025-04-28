@@ -9,7 +9,7 @@ const Navbar = () => {
   const provider = useAuth();
   console.log(provider);
   return (
-    <nav className="flex justify-between items-center bg-white px-10 py-4 shadow-md">
+    <nav className="flex justify-between items-center sticky top-0 z-10 bg-white px-10 py-4 shadow-md">
       <Link to={"/"}>
         <img
           src={logo}
