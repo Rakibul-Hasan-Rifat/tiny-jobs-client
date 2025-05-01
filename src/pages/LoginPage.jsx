@@ -54,7 +54,7 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res.user);
         toast.success("Login successful", {
-          position: "center",
+          position: "top center",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,

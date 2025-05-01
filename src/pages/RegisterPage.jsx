@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { Toaster } from "react-hot-toast";
-import bannerImg from "./../assets/banner-bg.jpg";
-import { Link } from "react-router";
-import { fileUpload } from "../utils/apis";
+import React from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "./../hooks/useAuth";
+import { fileUpload } from "../utils/apis";
+import bannerImg from "./../assets/banner-bg.jpg";
 
 const RegisterPage = () => {
-  const { register } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { register, updateUserInfo } = useAuth();
   const [image, setImage] = React.useState(null);
   const [imageUrl, setImageUrl] = React.useState(null);
 
@@ -40,7 +42,48 @@ const RegisterPage = () => {
     const { name, email, password, role } = Object.fromEntries(
       formData.entries()
     );
+
     console.log(name, email, password, imageUrl, role);
+
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+
+    register(email, password)
+      .then((res) => {
+        console.log(res.user);
+        updateUserInfo(name, imageUrl).then(() => {
+          toast.success("Registration successful", {
+            position: "center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          navigate(location.state ? `${location.state}` : "/");
+          e.target.reset();
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(err.message, {
+          position: "center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   return (

@@ -17,7 +17,7 @@ export const fileUpload = async (file) => {
     );
     const { data } = await response.json();
 
-    return data.display_url; // Return the URL of the uploaded image
+    return data.display_url; // Return the URL of the uploaded image in imgbb
   } catch (error) {
     console.error("Error uploading file:", error);
     throw error;
