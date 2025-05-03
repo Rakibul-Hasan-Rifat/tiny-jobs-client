@@ -28,8 +28,8 @@ const AuthProvider = ({ children }) => {
   const googleLogin = () => {
     setLoading(true);
     const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleProvider)
-  }
+    return signInWithPopup(auth, googleProvider);
+  };
 
   const logout = () => {
     setLoading(true);
@@ -47,6 +47,33 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      currentUser &&
+        fetch(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email: currentUser?.email }),
+          credentials: "include",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+
+      !currentUser &&
+        fetch(`${import.meta.env.VITE_SERVER_URL}/logout`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          credentials: "include",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+
       setLoading(false);
     });
     return () => unsubscribe();
@@ -54,7 +81,15 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, register, login, googleLogin, updateUserInfo, logout }}
+      value={{
+        user,
+        loading,
+        register,
+        login,
+        googleLogin,
+        updateUserInfo,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
