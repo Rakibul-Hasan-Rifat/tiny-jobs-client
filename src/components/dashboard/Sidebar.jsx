@@ -2,11 +2,17 @@ import React from "react";
 import { Link, NavLink } from "react-router";
 import logo from "./../../assets/logo.png";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
+import { FaHome } from "react-icons/fa";
+import WorkerNav from "./WorkerNav";
+import BuyerNav from "./BuyerNav";
+import AdminNav from "./AdminNav";
 
 const Sidebar = () => {
-    const { user } = useAuth();
+  const { user } = useAuth();
+  const { role } = useRole() || {};
   return (
-    <aside className="flex flex-col justify-between bg-white px-10 py-4 shadow-md">
+    <aside className="h-[100vh] w-[20vw] flex flex-col  bg-white px-8 py-4 shadow-md">
       <Link to={"/"}>
         <div>
           <img
@@ -16,86 +22,39 @@ const Sidebar = () => {
           />
         </div>
       </Link>
-      <hr />
-      <ul className="my-12 flex flex-col items-center justify-between gap-4 font-semibold text-gray-700">
-        <li>
+      {/* divider */}
+      <div className="w-full h-[1px] bg-gray-300 my-4"></div>
+      <ul className="my-5 flex flex-col items-center justify-between gap-3 font-semibold text-gray-700">
+        <li className="w-full">
           <NavLink
             to={"/"}
             className={({ isActive }) =>
-              `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+              `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
                 isActive
                   ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
                   : ""
               }`
             }
           >
-            Home
+            <FaHome />
+            <span className="ml-2">Home</span>
           </NavLink>
         </li>
-        {!user && (
-          <>
-            <li>
-              <NavLink
-                to={"/login"}
-                className={({ isActive }) =>
-                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
-                    isActive
-                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
-                      : ""
-                  }`
-                }
-              >
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/register"}
-                className={({ isActive }) =>
-                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
-                    isActive
-                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
-                      : ""
-                  }`
-                }
-              >
-                Register
-              </NavLink>
-            </li>
-          </>
-        )}
-        {user && (
-          <>
-            <li>
-              <NavLink
-                to={"/dashboard"}
-                className={({ isActive }) =>
-                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
-                    isActive
-                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
-                      : ""
-                  }`
-                }
-              >
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={"/profile"}
-                className={({ isActive }) =>
-                  `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
-                    isActive
-                      ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
-                      : ""
-                  }`
-                }
-              >
-                Profile
-              </NavLink>
-            </li>
-          </>
-        )}
+        {
+          role === "worker" && (
+            <WorkerNav />
+          )
+        }
+        {
+          role === "buyer" && (
+            <BuyerNav />
+          )
+        }
+        {
+          role === "admin" && (
+            <AdminNav />
+          )
+        }
       </ul>
     </aside>
   );
