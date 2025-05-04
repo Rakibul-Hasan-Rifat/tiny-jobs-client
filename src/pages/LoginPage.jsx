@@ -9,8 +9,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(navigate, location);
-
   const handleLogin = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -51,8 +49,50 @@ const LoginPage = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
-        console.log(res.user);
+      .then(({user}) => {
+        console.log(user);
+        navigate(location.state ? `${location.state}` : "/");
+
+        fetch(`${import.meta.env.VITE_SERVER_URL}/users`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user?.displayName,
+            email: user?.email,
+            image: user?.photoURL,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.acknowledged) {
+              toast.success(
+                "After registration by Google, user is created successfully",
+                {
+                  position: "center",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                }
+              );
+            } else {
+              toast.error(data.message, {
+                position: "center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+          });
+
         toast.success("Login successful", {
           position: "top center",
           autoClose: 2000,

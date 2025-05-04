@@ -59,17 +59,48 @@ const RegisterPage = () => {
       .then((res) => {
         console.log(res.user);
         updateUserInfo(name, imageUrl).then(() => {
-          toast.success("Registration successful", {
-            position: "center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          navigate(location.state ? `${location.state}` : "/");
-          e.target.reset();
+          fetch(`${import.meta.env.VITE_SERVER_URL}/users`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              role,
+              image: imageUrl,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.acknowledged) {
+                toast.success(
+                  "After registration, user is created successfully",
+                  {
+                    position: "center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  }
+                );
+                navigate(location.state ? `${location.state}` : "/");
+                e.target.reset();
+              } else {
+                toast.error(data.message, {
+                  position: "center",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              }
+            });
         });
       })
       .catch((err) => {

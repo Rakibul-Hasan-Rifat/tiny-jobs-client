@@ -73,7 +73,6 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             console.log(data);
           });
-
       setLoading(false);
     });
     return () => unsubscribe();

@@ -1,8 +1,13 @@
+import { Outlet } from "react-router";
+import Sidebar from "../components/dashboard/Sidebar";
 
 const DashboardLayout = () => {
   return (
-    <div>DashboardLayout</div>
-  )
-}
+    <section className="w-[20%]">
+      <Sidebar />
+      <Outlet />
+    </section>
+  );
+};
 
-export default DashboardLayout
+export default DashboardLayout;
