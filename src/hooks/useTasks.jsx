@@ -5,9 +5,8 @@ const useTasks = ({ type, email, sortByDate }) => {
     queryKey: ["tasks"],
     queryFn: async () => {
       const result = await fetch(
-        `${
-          import.meta.env.VITE_SERVER_URL
-        }/${type}/tasks?email=${email}`
+        `${import.meta.env.VITE_SERVER_URL}/${type}/tasks?email=${email}`,
+        { method: "GET", credentials: "include" }
       );
       const res = await result.json();
       sortByDate &&

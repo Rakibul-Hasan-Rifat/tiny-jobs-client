@@ -51,8 +51,9 @@ const AddTask = () => {
       },
     };
 
-    fetch(`${import.meta.env.VITE_SERVER_URL}/tasks`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/buyer/tasks`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

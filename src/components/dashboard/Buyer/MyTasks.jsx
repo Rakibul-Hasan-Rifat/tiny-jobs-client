@@ -52,13 +52,13 @@ const MyTasks = () => {
           <th className="border border-gray-300 px-4 py-2">Idx</th>
           <th className="border border-gray-300 px-4 py-2">Image</th>
           <th className="border border-gray-300 px-4 py-2">Task Name</th>
-          <th className="border border-gray-300 px-4 py-2">Status</th>
+          <th className="border border-gray-300 px-4 py-2">Workers</th>
           <th className="border border-gray-300 px-4 py-2">Deadline</th>
           <th className="border border-gray-300 px-4 py-2">Actions</th>
         </tr>
       </thead>
       <tbody>
-        {tasks.map((task, idx) => (
+        {tasks.sort((task1, task2) => task2.task_deadline - task1.task_deadline).map((task, idx) => (
           <tr key={task._id}>
             <td className="text-center border border-gray-300 px-4 py-2">
               {idx + 1}
@@ -73,7 +73,7 @@ const MyTasks = () => {
             <td className="border border-gray-300 px-4 py-2">
               {task.task_title}
             </td>
-            <td className="border border-gray-300 px-4 py-2">{task.status}</td>
+            <td className="border border-gray-300 px-4 py-2 text-center">{task.task_workers_count}</td>
             <td className="text-center border border-gray-300 px-4 py-2">
               {task.task_deadline}
             </td>
