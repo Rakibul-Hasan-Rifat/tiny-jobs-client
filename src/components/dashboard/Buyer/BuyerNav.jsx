@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTasks } from "react-icons/fa";
+import { FaHistory, FaTasks } from "react-icons/fa";
 import { HiOutlineDocumentCurrencyBangladeshi } from "react-icons/hi2";
 import { MdAddTask } from "react-icons/md";
 import { NavLink } from "react-router";
@@ -9,7 +9,7 @@ const BuyerNav = () => {
     <>
       <li className="w-full">
         <NavLink
-          to={"/task-list"}
+          to={"/dashboard/add-task"}
           className={({ isActive }) =>
             `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
               isActive
@@ -24,7 +24,7 @@ const BuyerNav = () => {
       </li>
       <li className="w-full">
         <NavLink
-          to={"/submission"}
+          to={"/dashboard/my-tasks"}
           className={({ isActive }) =>
             `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
               isActive
@@ -39,7 +39,7 @@ const BuyerNav = () => {
       </li>
       <li className="w-full">
         <NavLink
-          to={"/withdraw"}
+          to={"/dashboard/buy-coin"}
           className={({ isActive }) =>
             `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
               isActive
@@ -50,6 +50,21 @@ const BuyerNav = () => {
         >
           <HiOutlineDocumentCurrencyBangladeshi />
           <span className="ml-2">Purchase Coin</span>
+        </NavLink>
+      </li>
+      <li className="w-full">
+        <NavLink
+          to={"/dashboard/payment-history"}
+          className={({ isActive }) =>
+            `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
+              isActive
+                ? "bg-yellow-400/60 hover:bg-yellow-400/80 text-cyan-900 hover:text-cyan-950"
+                : ""
+            }`
+          }
+        >
+          <FaHistory />
+          <span className="ml-2">Pay History</span>
         </NavLink>
       </li>
     </>

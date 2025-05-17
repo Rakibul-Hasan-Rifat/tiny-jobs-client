@@ -4,9 +4,11 @@ import { Link, NavLink } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import logo from "../../assets/logo.png";
 import useAuth from "../../hooks/useAuth";
+import useDetails from "../../hooks/useDetails";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const { role, coin } = useDetails() || {};
   console.log(user);
 
   const handleLogout = () => {
@@ -91,7 +93,7 @@ const Navbar = () => {
             <>
               <li>
                 <NavLink
-                  to={"/dashboard"}
+                  to={`/dashboard/${role}`}
                   className={({ isActive }) =>
                     `px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
                       isActive
@@ -124,7 +126,7 @@ const Navbar = () => {
                   }}
                   className="flex items-center gap-2 shadow hover:text-amber-500/60 px-4 py-2 rounded font-semibold cursor-pointer"
                 >
-                  <span>{120}</span> <TbCoinTaka />
+                  <span>{coin}</span> <TbCoinTaka />
                 </div>
               </li>
               <li>

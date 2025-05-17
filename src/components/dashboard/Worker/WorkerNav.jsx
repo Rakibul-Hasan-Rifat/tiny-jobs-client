@@ -9,7 +9,7 @@ const WorkerNav = () => {
     <>
       <li className="w-full">
         <NavLink
-          to={"/task-list"}
+          to={"/dashboard/task-list"}
           className={({ isActive }) =>
             `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
               isActive
@@ -24,7 +24,7 @@ const WorkerNav = () => {
       </li>
       <li className="w-full">
         <NavLink
-          to={"/submission"}
+          to={"/dashboard/my-submits"}
           className={({ isActive }) =>
             `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
               isActive
@@ -39,7 +39,7 @@ const WorkerNav = () => {
       </li>
       <li className="w-full">
         <NavLink
-          to={"/withdraw"}
+          to={"/dashboard/withdraws"}
           className={({ isActive }) =>
             `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
               isActive

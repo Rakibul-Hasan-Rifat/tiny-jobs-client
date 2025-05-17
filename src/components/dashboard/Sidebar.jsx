@@ -1,16 +1,14 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
 import logo from "./../../assets/logo.png";
-import useAuth from "../../hooks/useAuth";
-import useRole from "../../hooks/useRole";
+import useDetails from "../../hooks/useDetails";
 import { FaHome } from "react-icons/fa";
-import WorkerNav from "./WorkerNav";
-import BuyerNav from "./BuyerNav";
-import AdminNav from "./AdminNav";
+import WorkerNav from "./Worker/WorkerNav";
+import BuyerNav from "./Buyer/BuyerNav";
+import AdminNav from "./Admin/AdminNav";
 
 const Sidebar = () => {
-  const { user } = useAuth();
-  const { role } = useRole() || {};
+  const { role } = useDetails() || {};
   return (
     <aside className="h-[100vh] w-[20vw] flex flex-col  bg-white px-8 py-4 shadow-md">
       <Link to={"/"}>
@@ -23,11 +21,11 @@ const Sidebar = () => {
         </div>
       </Link>
       {/* divider */}
-      <div className="w-full h-[1px] bg-gray-300 my-4"></div>
-      <ul className="my-5 flex flex-col items-center justify-between gap-3 font-semibold text-gray-700">
+      <div className="w-full h-[1px] bg-gray-300 my-6"></div>
+      <ul className="my-2 flex flex-col items-center justify-between gap-3 font-semibold text-gray-700">
         <li className="w-full">
           <NavLink
-            to={"/"}
+            to={`/dashboard/${role}`}
             className={({ isActive }) =>
               `flex items-center w-full px-4 py-2 font-semibold rounded-md hover:bg-amber-200/40 hover:text-gray-600 ${
                 isActive
@@ -40,21 +38,9 @@ const Sidebar = () => {
             <span className="ml-2">Home</span>
           </NavLink>
         </li>
-        {
-          role === "worker" && (
-            <WorkerNav />
-          )
-        }
-        {
-          role === "buyer" && (
-            <BuyerNav />
-          )
-        }
-        {
-          role === "admin" && (
-            <AdminNav />
-          )
-        }
+        {role === "worker" && <WorkerNav />}
+        {role === "buyer" && <BuyerNav />}
+        {role === "admin" && <AdminNav />}
       </ul>
     </aside>
   );
