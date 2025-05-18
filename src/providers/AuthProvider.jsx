@@ -50,11 +50,11 @@ const AuthProvider = ({ children }) => {
       currentUser &&
         fetch(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
           method: "POST",
+          credentials: "include",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({ email: currentUser?.email }),
-          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {
